@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="HelloOpenCV" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/HelloOpenCV" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_features2d2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_nonfree2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_flann2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_core2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_calib3d2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_contrib2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_core2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_features2d2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_flann2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_gpu2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_highgui2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_imgproc2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_legacy2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_ml2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_nonfree2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_objdetect2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_ocl2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_photo2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_stitching2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_superres2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_video2411.dll.a" />
+					<Add library="..\..\..\OpenCV\build\lib\libopencv_videostab2411.dll.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/HelloOpenCV" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-s" />
+				</Compiler>
+			</Target>
+			<Environment>
+				<Variable name="CV_VERSION" value="2411" />
+			</Environment>
+		</Build>
+		<Compiler>
+			<Add directory="$(#cv.include)" />
+		</Compiler>
+		<Linker>
+			<Add library="opencv_imgproc$(CV_VERSION).dll" />
+			<Add library="opencv_core$(CV_VERSION).dll" />
+			<Add library="opencv_highgui$(CV_VERSION).dll" />
+			<Add directory="$(#cv.lib)" />
+			<Add directory="$(#cv.bin)" />
+		</Linker>
+		<Unit filename="lena.jpg" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

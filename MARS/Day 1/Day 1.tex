@@ -1,0 +1,20 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{ulem}
+	\geometry{left=3.18cm,right=3.18cm,top=2.54cm,bottom=2.54cm}
+	\title{Day 1题解报告}
+	\author{2014060105005{ }何柱{ }男}
+\begin{document}
+	\maketitle
+	\appendix
+	\section{Your Pyramid Starts Here}
+	本题无需过多考虑，用字符串数组把0$\sim$9十个数字的Soroban表示出来，然后用循环把n的每一位显示出来，但要注意题目中的"We can assume that number 0 has no leading zeroes."，即0要做特殊处理。
+	\section{Bigger Challenge}
+	本题直接把所有数字读入一个数组A[N]，用排序算法将数组的元素从小到大排列，A[N/2]即是Answer。
+	\section{Techniques more subtle}
+	典型的BFS题。将整个3D dungeon输入到3维数组A[L][R][C]，定义一个由坐标及时间组成的结构体，以及一个由这个结构体组成的队列，确定初始位置后，将初始位置及时间为0入列，进入循环，出列，遍历6个方向，若某个方向可走且没走过（剪枝），将新的坐标及新的时间入列，循环直到队列为空或找到终点，队列为空即“Trapped!”，找到终点即可输出时间。
+	\section{Advanced skills}
+	本题的数据范围上限为200000，即要求时间复杂度为O(N)。遍历字符串，记录当前字符以及当前字符连续出现的次数，以及上一种字符是否重复了。若上一种字符重复了，则当前字符最多只能输出1个，即当前字符再次出现时不进行操作；若上一种字符不重复，但当前的字符已经重复2次了，也不进行操作；其他情况均输出当前字符。
+	\section*{\sout{E{ }{ }{ }Serious challenges}}
+	由于本人在比赛当天下午1:30需参加CCF计算机软件能力认证考试，故没时间完成E题，请见谅。
+\end{document}

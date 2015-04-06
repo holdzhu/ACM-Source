@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+*.in
+*.out
+*.txt
+*.class
+uestc2015ccpp/
