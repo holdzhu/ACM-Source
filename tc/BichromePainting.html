@@ -1,0 +1,46 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>We have a square board divided into a grid of unit square cells.
+Initially each cell is white.
+You are given a vector &lt;string&gt; <b>board</b> that describes the desired final state.
+In the final state each cell is either white ('W') or black ('B').
+<br></br>
+<br></br>
+You are also given an int <b>k</b>.
+The only change you can make to the board looks as follows:
+You may select any square of <b>k</b> by <b>k</b> cells and repaint all of them using the same color: either black or white.
+Later changes to the board may overlap previous ones.
+<br></br>
+<br></br>
+Return "Possible" if we can obtain the desired final state.
+Otherwise, return "Impossible".</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>BichromePainting</td></tr><tr><td>Method:</td><td>isThatPossible</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;, int</td></tr><tr><td>Returns:</td><td>string</td></tr><tr><td>Method signature:</td><td>string isThatPossible(vector &lt;string&gt; board, int k)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td>n will be between 1 and 20, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>k</b> will be between 1 and n, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>board</b> will contain exactly n elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>board</b> will contain exactly n characters.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>board</b> will be 'W' or 'B'.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BBBW&quot;,
+ &quot;BWWW&quot;,
+ &quot;BWWW&quot;,
+ &quot;WWWW&quot;}</pre></td></tr><tr><td><pre>3</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">We can reach the desired state by doing two changes.
+First we paint the 3x3 square in the top left corner black:
+<pre>
+BBBW
+BBBW
+BBBW
+WWWW
+</pre>
+Then we paint the 3x3 square in the bottom right corner white.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BW&quot;,
+ &quot;WB&quot;}
+</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Impossible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">We can get only an all-white board and an all-black board.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BWBWBB&quot;,
+ &quot;WBWBBB&quot;,
+ &quot;BWBWBB&quot;,
+ &quot;WBWBBB&quot;,
+ &quot;BBBBBB&quot;,
+ &quot;BBBBBB&quot;}
+</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BWBWBB&quot;,
+ &quot;WBWBWB&quot;,
+ &quot;BWBWBB&quot;,
+ &quot;WBWBWB&quot;,
+ &quot;BWBWBB&quot;,
+ &quot;BBBBBB&quot;}
+</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Impossible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BWBWBB&quot;,
+ &quot;WBWBWB&quot;,
+ &quot;BWBWBB&quot;,
+ &quot;WBWBWB&quot;,
+ &quot;BWBWBB&quot;,
+ &quot;BBBBBB&quot;}
+</pre></td></tr><tr><td><pre>1</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;BB&quot;,
+ &quot;BB&quot;}</pre></td></tr><tr><td><pre>2</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
