@@ -14,13 +14,21 @@ struct Point
 	}
 };
 
-int a[1000][1000];
+struct Query
+{
+	int d;
+	Point p;
+	bool operator < (const Query &rhs) const
+	{
+		return d > rhs.d || (d == rhs.d && p < rhs.p);
+	}
+};
+
 int n, m, T;
 int q[100000];
-set<Point> P[100000];
-int ans[100000];
+set<Query> query;
 int p[1000000];
-bool vis[1000000];
+bool root[1000000];
 const int d[] = {-1, 0, 1, 0, 0, 1, 0, -1};
 
 int find(int x)
@@ -39,71 +47,76 @@ int main()
 	scanf("%d", &Z);
 	while (Z--)
 	{
-		memset(vis, 0, sizeof vis);
+		query.clear();
 		scanf("%d %d", &n, &m);
 		for (int i = 0; i < n; ++i)
 		{
 			for (int j = 0; j < m; ++j)
 			{
-				scanf("%d", &a[i][j]);
+				scanf("%d", &p[idx(i, j)]);
 			}
 		}
 		scanf("%d", &T);
 		for (int i = 0; i < T; ++i)
 		{
 			scanf("%d", &q[i]);
-			P[i].clear();
 		}
 		for (int i = 0; i < n; ++i)
 		{
 			for (int j = 0; j < m; ++j)
 			{
-				int pos = upper_bound(q, q + T, a[i][j] - 1) - q - 1;
+				int pos = upper_bound(q, q + T, p[idx(i, j)] - 1) - q - 1;
 				if (pos >= 0)
 				{
-					P[pos].insert((Point){i, j});
+					query.insert((Query){pos, (Point){i, j}});
 				}
 			}
 		}
+		memset(p, -1, sizeof p);
 		int ans = 0;
-		for (int i = 0; i < n * m; ++i)
+		memset(root, 0, sizeof root);
+		memset(q, 0, sizeof q);
+		int last = T - 1;
+		for (set<Query>::iterator i = query.begin(); i != query.end(); ++i)
 		{
-			p[i] = i;
-		}
-		for (int i = T - 1; i >= 0; --i)
-		{
-			for (set<Point>::iterator j = P[i].begin(); j != P[i].end(); ++j)
+			int x = i -> p.x;
+			int y = i -> p.y;
+			if (i -> d < last)
 			{
-				int x = j -> x;
-				int y = j -> y;
-				set<int> t;
-				for (int k = 0; k < 4; ++k)
+				for (int j = i -> d + 1; j <= last; ++j)
 				{
-					int dx = x + d[k * 2];
-					int dy = y + d[k * 2 + 1];
-					if (dx >= 0 && dy >= 0 && dx < n && dy < m && vis[idx(dx, dy)])
-					{
-						int s = find(idx(dx, dy));
-						t.insert(s);
-					}
-					if (dx >= 0 && dy >= 0 && dx < n && dy < m && vis[idx(dx, dy)])
-					{
-						int s = find(idx(dx, dy));
-						p[s] = idx(x, y);
-					}
+					q[j] = ans;
 				}
-				if (t.size() == 0)
-				{
-					ans++;
-				}
-				else
-				{
-					ans -= t.size() - 1;
-				}
-				vis[idx(x, y)] = true;
+				last = i -> d;
 			}
-			printf("%d\n", ans);
+			p[idx(x, y)] = idx(x, y);
+			for (int k = 0; k < 4; ++k)
+			{
+				int dx = x + d[k * 2];
+				int dy = y + d[k * 2 + 1];
+				if (dx >= 0 && dy >= 0 && dx < n && dy < m && p[idx(dx, dy)] >= 0)
+				{
+					int s = find(idx(dx, dy));
+					if (root[s])
+					{
+						root[s] = false;
+						ans--;
+					}
+					p[s] = idx(x, y);
+				}
+			}
+			root[idx(x, y)] = true;
+			ans++;
 		}
+		for (int j = 0; j <= last; ++j)
+		{
+			q[j] = ans;
+		}
+		for (int i = 0; i < T; ++i)
+		{
+			printf("%d ", q[i]);
+		}
+		printf("\n");
 	}
 	return 0;
 }
