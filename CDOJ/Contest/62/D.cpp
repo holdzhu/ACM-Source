@@ -50,10 +50,6 @@ int main()
 				{
 					queue[0][p[0]++] = (Node){count++, j};
 					dontmind[j] = true;
-					// for (vector<int>::iterator k = G[j].begin(); k != G[j].end(); ++k)
-					// {
-					// 	dontmind[*k] = true;
-					// }
 				}
 				x >>= 1;
 			}
