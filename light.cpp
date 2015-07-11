@@ -77,65 +77,100 @@ int main()
 			}
 		}
 	}
-	for (int i = 0; i < s; ++i)
-	{
-		for (int j = 0; j < s; ++j)
-		{
-			printf("%d", a[i][j]);
-		}
-		printf(" ");
-		for (int j = 0; j < s; ++j)
-		{
-			printf("%d", a[i][j + s]);
-		}
-		printf("\n");
-	}
-	printf("\n");
+	// for (int i = 0; i < s; ++i)
+	// {
+	// 	for (int j = 0; j < s; ++j)
+	// 	{
+	// 		printf("%d", a[i][j]);
+	// 	}
+	// 	printf(" ");
+	// 	for (int j = 0; j < s; ++j)
+	// 	{
+	// 		printf("%d", a[i][j + s]);
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("\n");
+	// for (int i = 0; i < n; ++i)
+	// {
+	// 	for (int x = 0; x < n; ++x)
+	// 	{
+	// 		for (int j = 0; j < m; ++j)
+	// 		{
+	// 			for (int y = 0; y < m; ++y)
+	// 			{
+	// 				printf("%d", a[i * m + j][i * m + j] & a[i * m + j][s + x * m + y]);
+	// 			}
+	// 			printf(" ");
+	// 		}
+	// 		printf("\n");
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("\n");
+	bool c[n][m];
 	for (int i = 0; i < n; ++i)
 	{
-		for (int x = 0; x < n; ++x)
+		for (int j = 0; j < m; ++j)
 		{
-			for (int j = 0; j < m; ++j)
+			c[i][j] = 0;
+			for (int x = 0; x < n; ++x)
 			{
 				for (int y = 0; y < m; ++y)
 				{
-					printf("%d", a[i * m + j][i * m + j] & a[i * m + j][s + x * m + y]);
+					c[i][j] ^= (a[i * m + j][i * m + j] & a[i * m + j][s + x * m + y]);
 				}
-				printf(" ");
 			}
-			printf("\n");
+			printf("%c", c[i][j] ? '.' : ' ');
 		}
 		printf("\n");
 	}
 	printf("\n");
-	bool b[s][s];
-	memset(b, 0, sizeof(b));
-	for (int i = 0; i < s; ++i)
-	{
-		for (int j = 0; j < s; ++j)
-		{
-			for (int k = 0; k < s; ++k)
-			{
-				b[i][j] ^= a[i][s + k] & a[j][s + k];
-			}
-		}
-	}
-	for (int i = 0; i < n; ++i)
-	{
-		for (int x = 0; x < n; ++x)
-		{
-			for (int j = 0; j < m; ++j)
-			{
-				for (int y = 0; y < m; ++y)
-				{
-					printf("%d", a[i * m + j][i * m + j] & b[i * m + j][x * m + y]);
-				}
-				printf(" ");
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-	printf("\n");
+	// for (int i = 0; i < n; ++i)
+	// {
+	// 	for (int j = 0; j < m; ++j)
+	// 	{
+	// 		bool bb = 0;
+	// 		for (int x = 0; x < n; ++x)
+	// 		{
+	// 			for (int y = 0; y < m; ++y)
+	// 			{
+	// 				bb ^= (a[i * m + j][i * m + j] & a[i * m + j][s + x * m + y]) & c[x][y];
+	// 			}
+	// 		}
+	// 		printf("%c", bb ? '.' : ' ');
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("\n");
+	// bool b[s][s];
+	// memset(b, 0, sizeof(b));
+	// for (int i = 0; i < s; ++i)
+	// {
+	// 	for (int j = 0; j < s; ++j)
+	// 	{
+	// 		for (int k = 0; k < s; ++k)
+	// 		{
+	// 			b[i][j] ^= a[i][s + k] & a[j][s + k];
+	// 		}
+	// 	}
+	// }
+	// for (int i = 0; i < n; ++i)
+	// {
+	// 	for (int x = 0; x < n; ++x)
+	// 	{
+	// 		for (int j = 0; j < m; ++j)
+	// 		{
+	// 			for (int y = 0; y < m; ++y)
+	// 			{
+	// 				printf("%d", a[i * m + j][i * m + j] & b[i * m + j][x * m + y]);
+	// 			}
+	// 			printf(" ");
+	// 		}
+	// 		printf("\n");
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("\n");
 	return 0;
 }

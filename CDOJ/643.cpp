@@ -1,26 +1,21 @@
 #include <cstdio>
 
+char s[50];
+int k[26];
+
 int main()
 {
 	int T;
 	scanf("%d", &T);
-	for (int _T = 0; _T < T; ++_T)
+	for (int kase = 1; kase <= T; ++kase)
 	{
-		int k[26];
 		for (int i = 0; i < 26; ++i)
 		{
 			scanf("%d", &k[i]);
 		}
 		int N;
 		scanf("%d", &N);
-		char s[50];
-		if (_T)
-		{
-			putchar('\n');
-			putchar('\n');
-			putchar('\n');
-		}
-		printf("case %d:\n", _T + 1);
+		printf("case %d:\n", kase);
 		while (N--)
 		{
 			scanf("%s", s);
@@ -33,11 +28,11 @@ int main()
 			{
 				ans += k[s[lp] - 'a'];
 			}
-			printf("%.2lf", ans / (lp - p - 1));
-			if (N)
-			{
-				putchar('\n');
-			}
+			printf("%.2f\n", ans / (lp - p - 1));
+		}
+		if (kase < T)
+		{
+			printf("\n");
 		}
 	}
 	return 0;

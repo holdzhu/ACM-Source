@@ -1,0 +1,34 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage{slashbox}
+	\usepackage{tabularx}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=3.18cm,right=3.18cm,top=2.44cm,bottom=2.44cm}
+	\title{G - 三句话题意}
+	\author{何柱}
+	\allowdisplaybreaks
+	\setcounter{MaxMatrixCols}{20}
+	\newcommand{\block}[1]{
+		\underbrace{\begin{matrix}1 & \cdots & 1\end{matrix}}_{#1}
+	}
+\begin{document}
+	\maketitle
+	每次操作后的所有数字为操作前所有数字的线性组合。设操作了t次后的数字组成的列向量为$v_t$，则有以下关系：
+	$$v_{t+1}=Av_t$$
+	其中
+	$$A=\begin{pmatrix}
+		1 & \block{d} &&&&& \block{d} \\
+		1 & 1 & \block{d} &&&& \block{d - 1} \\
+		1 & 1 & 1 & \block{d} &&& \block{d - 2} \\
+		\vdots & \vdots & \vdots & \vdots &&& \vdots \\
+		\block{d} &&&&&& \block{d + 1}
+	\end{pmatrix}$$
+	可以推出
+	$$v_{t}=A^kv_0$$
+	其中$A^k$可以用快速幂算法来做。
+
+	此外，因为$A$为循环矩阵，所以对于乘法封闭，即两个循环矩阵的乘积依然是循环矩阵，所以对于循环矩阵只需要记录第一行，乘法运算中计算出第一行即可。
+\end{document}

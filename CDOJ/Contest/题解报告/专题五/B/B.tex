@@ -1,0 +1,39 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=3.18cm,right=3.18cm,top=2.44cm,bottom=2.44cm}
+	\title{B - 邱老师的心跳约会大作战}
+	\author{何柱}
+	\allowdisplaybreaks
+\begin{document}
+	\maketitle
+	在公式$\frac{S}{s_i}+\frac{R}{r_i}=T$中，如果令$A=S, x=\frac{1}{s_i}, B=R, y=\frac{1}{r_i}, T=C$，可以得到$$Ax+By=C$$这是一个直线方程。因为$S>0, R>0$，斜率只能是负的。把所有妹子都表示成平面上的点$(\frac{1}{s_i},\frac{1}{r_i})$，则当某个妹子可能是最低分，存在某个斜率使得穿过该妹子的直线的截距最小，且它的左下角$(\Delta x\leq0, \Delta y\leq0)$不能有其它点。换句话说，它是所有点构成的凸包的顶点中左下角部分的一点。所以对所有点计算凸包，取左下角部分，每个点对应的妹子都是可能是最低分的。
+	\begin{figure}[h]
+		\begin{center}
+			\begin{tikzpicture}
+			    % Draw axes
+			    \draw [<->,thick] (0, 6) node (yaxis) [above] {$y$}
+			        |- (6, 0) node (xaxis) [right] {$x$};
+			    \fill[red] (5 / 5, 5 / 2) coordinate (a_0) circle (2pt);
+			    \fill[red] (5 / 4, 5 / 4) coordinate (a_1) circle (2pt);
+			    \fill[red] (5 / 3, 5 / 5) coordinate (a_2) circle (2pt);
+			    \fill (5 / 1, 5 / 4) coordinate (a_3) circle (2pt);
+			    \fill (5 / 3, 5 / 3) coordinate (a_4) circle (2pt);
+			    \fill (5 / 2, 5 / 2) coordinate (a_5) circle (2pt);
+			    \fill (5 / 4, 5 / 1) coordinate (a_6) circle (2pt);
+			    \fill (5 / 2, 5 / 3) coordinate (a_7) circle (2pt);
+			    \fill (5 / 2, 5 / 5) coordinate (a_8) circle (2pt);
+			    \draw[red] (a_0) -- (a_1);
+			    \draw[red] (a_1) -- (a_2);
+			    \draw (a_2) -- (a_8);
+			    \draw (a_8) -- (a_3);
+			    \draw (a_3) -- (a_6);
+			    \draw (a_6) -- (a_0);
+			\end{tikzpicture}
+		\end{center}
+		\caption{每个妹子对应点$(\frac{1}{s_i}, \frac{1}{r_i})$，红色的点表示对应的妹子可能是最低分}
+	\end{figure}
+\end{document}

@@ -1,5 +1,13 @@
 #include <cstdio>
 
-int main() {char *p,a;printf(p="main() {char *p,a;printf(p=%c%s%c,a='",a='"',p,
-a);printf(p="%c',p,%ca);printf(p=%c%s%c%c,a,10,a,p,a,10,a,%c%s%c,a,10);}%c"
-,a,10,a,p,a,10,a," *** Sichuan State Programming C ontest 2014 *** ",a,10);}
+int dfs(int x)
+{
+  return x == 0 ? 1 : x * dfs(x - 1);
+}
+
+int main()
+{
+  printf("hello,world\n");
+  printf("%d\n", dfs(10));
+  return 0;
+}

@@ -1,10 +1,8 @@
 #include <cstdio>
-#include <algorithm>
+#include <vector>
+#include <set>
 
-bool cmp(int a, int b)
-{
-	return a > b;
-}
+using namespace std;
 
 int main()
 {
@@ -14,44 +12,48 @@ int main()
 	{
 		int n;
 		scanf("%d", &n);
-		int d[n];
-		int s = 0;
+		multiset<int> s;
 		for (int i = 0; i < n; ++i)
 		{
-			scanf("%d", &d[i]);
-			s += d[i];
+			int t;
+			scanf("%d", &t);
+			if (t)
+			{
+				s.insert(t);
+			}
 		}
-		if (s % 2)
+		bool flag = true;
+		while (s.size() > 0)
 		{
-			printf("NO\n");
+			int p = *(--s.end());
+			s.erase(--s.end());
+			vector<int> t;
+			while (s.size() > 0 && p > 0)
+			{
+				p--;
+				t.push_back(*(--s.end()) - 1);
+				s.erase(--s.end());
+			}
+			if (p > 0)
+			{
+				flag = false;
+				break;
+			}
+			for (int i = 0; i < t.size(); ++i)
+			{
+				if (t[i])
+				{
+					s.insert(t[i]);
+				}
+			}
+		}
+		if (flag)
+		{
+			printf("YES\n");
 		}
 		else
 		{
-			for (int i = 0; i < n - 1; ++i)
-			{
-				std::sort(d + i, d + n, cmp);
-				for (int j = i + 1; j < n; ++j)
-				{
-					if (d[i] && d[j])
-					{
-						d[i]--;
-						d[j]--;
-						s -= 2;
-					}
-				}
-				if (d[i])
-				{
-					break;
-				}
-			}
-			if (s)
-			{
-				printf("NO\n");
-			}
-			else
-			{
-				printf("YES\n");
-			}	
+			printf("NO\n");
 		}
 	}
 	return 0;

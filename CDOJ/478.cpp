@@ -1,60 +1,95 @@
 #include <cstdio>
+#include <cstring>
+#include <cmath>
 #include <vector>
+
 using namespace std;
 
-const int maxint = 1e9;
+vector<int> pm;
+int tim[32];
+long long num;
+
+int gcd(int a, int b)
+{
+	return b ? gcd(b, a % b) : a;
+}
+
+int exgcd(int a, int b, int& x, int& y)
+{
+	if (b)
+	{
+		int d = exgcd(b, a % b, y, x);
+		y -= x * (a / b);
+		return d;
+	}
+	x = 1;
+	y = 0;
+	return a;
+}
+
+int inv(int a, int mod)
+{
+	int x, y;
+	exgcd(a, mod, x, y);
+	return ((x % mod) + mod) % mod;
+}
 
 int main()
 {
-	long long n, m;
-	while (scanf("%lld%lld", &n, &m) == 2 && n && m)
+	int n, m;
+	while (scanf("%d %d", &n, &m) == 2 && n && m)
 	{
-		vector<long long> s;
+		int t = m;
+		int sqr = sqrt(m);
+		for (int i = 2; i <= sqr && t > 1; ++i)
+		{
+			if (t % i == 0)
+			{
+				while (t % i == 0)
+				{
+					t /= i;
+				}
+				pm.push_back(i);
+			}
+		}
+		if (t > 1)
+		{
+			pm.push_back(t);
+		}
 		long long sum = 0;
-		s.push_back(1);
+		num = 1;
+		memset(tim, 0, sizeof tim);
 		for (int i = 0; i < n; ++i)
 		{
-			vector<long long> _s;
-			_s.push_back(0);
-			for (int j = 0; j < s.size(); ++j)
+			int M = 2 * (2 * i + 1);
+			int D = i + 2;
+			for (int i = 0; i < pm.size() && M > 1; ++i)
 			{
-				_s[j] += s[j] * (i * 4 + 2) % maxint;
-				if (j < s.size() - 1 || s[j] * (i * 4 + 2) / maxint + _s[j] / maxint)
+				while (M % pm[i] == 0)
 				{
-					_s.push_back(s[j] * (i * 4 + 2) / maxint + _s[j] / maxint);
+					M /= pm[i];
+					tim[i]++;
 				}
-				_s[j] %= maxint;
 			}
-			long long t = 0;
-			while (s.size() < _s.size())
+			num = num * M % m;
+			for (int i = 0; i < pm.size() && D > 1; ++i)
 			{
-				s.push_back(0);
+				while (D % pm[i] == 0)
+				{
+					D /= pm[i];
+					tim[i]--;
+				}
 			}
-			for (int j = _s.size() - 1; j >= 0; --j)
+			num = num * inv(D, m) % m;
+			long long tmp = num;
+			for (int i = 0; i < pm.size(); ++i)
 			{
-				s[j] = (_s[j] + t * maxint) / (i + 2);
-				t = (_s[j] + t * maxint) % (i + 2);
+				for (int j = 0; j < tim[i]; ++j)
+				{
+					tmp = tmp * pm[i] % m;
+				}
 			}
-			for (int j = 0; j < s.size() - 1; ++j)
-			{
-				s[j + 1] += s[j] / maxint;
-				s[j] %= maxint;
-			}
-			while (s.back() >= maxint)
-			{
-				t = s.back() /= maxint;
-				s.back() %= maxint;
-				s.push_back(t);
-			}
-			t = 0;
-			for (int j = s.size() - 1; j >= 0; --j)
-			{
-				t *= maxint;
-				t += s[j] % m;
-				t %= m;
-			}
-			sum += t;
-			sum %= m;
+			sum = (sum + tmp) % m;
 		}
 		printf("%lld\n", sum);
 	}

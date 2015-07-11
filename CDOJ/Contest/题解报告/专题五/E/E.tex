@@ -1,0 +1,33 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage{slashbox}
+	\usepackage{tabularx}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=2.44cm,right=2.44cm,top=2.44cm,bottom=2.44cm}
+	\title{E - 王老板和仓鼠}
+	\author{何柱}
+	\allowdisplaybreaks
+\begin{document}
+	\maketitle
+	在操作3中，可以证明，最后一定会把$b$变成$b\bmod a$，整个操作与求$gcd$十分相似。假设操作者遇到状态$(a,b)$，不妨设$a\leq b$，如果$(a,b\bmod a)$是必输状态，那么他可以毫不犹豫地把$b$换成$b\bmod a$，即$(a,b)$为必赢状态；但是如果$(a,b\bmod a)$是必赢状态，是否存在一个必输状态$(a,b-a^k)$呢？在这个过程中，状态只与两个值$b-b\bmod a$和$a$有关。如果我们能求出状态和这两个值的关系，设为$f(x,y)$，就可以知道$(a,b)$的状态。通过打表可以归纳出$$f(x,y)=\lfloor\frac{x-1}{y+1}\rfloor\bmod(y+1)\bmod 2$$
+
+	所以当$(a,b\bmod a)$是必输状态或者$f(b-b\bmod a,a)=0$且$(a,b\bmod a)$是必赢状态时，$(a,b)$为必赢状态；否则$(a,b)$为必输状态。终止状态$(0,x)$为必输状态。
+	\newcolumntype{C}{>{\centering\arraybackslash} m{0.018\linewidth} }
+	\begin{figure}[h]
+		\begin{center}
+			\begin{tabular}{|c|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|}\hline
+				\backslashbox{y\kern-1em}{\kern-1em x} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \hline
+				1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\ \hline
+				2 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 \\ \hline
+				3 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 \\ \hline
+				4 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \hline
+				5 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\ \hline
+				6 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\ \hline
+			\end{tabular}
+		\end{center}
+		\caption{f(x,y)}
+	\end{figure}
+\end{document}

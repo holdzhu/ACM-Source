@@ -1,0 +1,16 @@
+{
+    "cmd": "cmd",
+	"args": ["/c",
+            "clang++",
+            "{FILE_ACTIVE}",
+            "-o",
+            "{FILE_ACTIVE_PATH}\\{FILE_ACTIVE_NAME_BASE}",
+            "-static-libgcc",
+            "-static-libstdc++",
+            "-std=c++11",
+            "&&",
+            "start",
+            "runtest",
+            "{FILE_ACTIVE_PATH}\\{FILE_ACTIVE_NAME_BASE}"],
+    "sh": false
+}

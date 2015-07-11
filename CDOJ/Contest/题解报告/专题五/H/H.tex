@@ -1,0 +1,81 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=3.18cm,right=3.18cm,top=2.44cm,bottom=2.44cm}
+	\title{H - 之之的困惑}
+	\author{何柱}
+	\allowdisplaybreaks
+\begin{document}
+	\maketitle
+	考虑以下的排列分类方法：
+	\begin{enumerate}[A]
+		\item $p(n)=n$
+		\item $p(n-1)=n, p(n)<n-1$
+		\item $p(n-1)=n, p(n)=n-1$
+		\item $p(n-1)\neq n, p(n)<n-1$
+		\item $p(n-1)\neq n, p(n)=n-1$
+	\end{enumerate}
+
+	令$dp[n][k][type]$表示1到n的排列p，满足$|p(i)-i|=1$的个数为$k$，且$p$的类型为$type$的个数。先逆向考虑每种类型的$1$到$n-1$的排列可以转移到哪些类型的$1$到$n$的排列，把新加的数$n$放在每个$n-1$的排列最后，再研究它和前面的每个数交换后的类型。
+
+	\begin{enumerate}[A]
+		\item \begin{enumerate}
+			\item $dp[n-1][k][A]\rightarrow dp[n][k][A]$：不交换
+			\item $dp[n-1][k-2][A]\rightarrow dp[n][k][C]$：与$n-1$交换
+			\item $dp[n-1][k+1][A]*(k+1)\rightarrow dp[n][k][D]$：与在$p(n-1)$之前的所有$|p(i)-i|=1$的数交换
+			\item $dp[n-1][k][A]*(n-k-2)\rightarrow dp[n][k][D]$：与在$p(n-1)$之前的所有$|p(i)-i|\neq 1$的数交换
+		\end{enumerate}
+		\item \begin{enumerate}
+			\item $dp[n-1][k][B]\rightarrow dp[n][k][A]$：不交换
+			\item $dp[n-1][k][B]\rightarrow dp[n][k][E]$：与$n-1$交换
+			\item $dp[n-1][k-1][B]\rightarrow dp[n][k][B]$：与$p(n-1)<n-2$交换
+			\item $dp[n-1][k+1][B]*k\rightarrow dp[n][k][D]$：与在$p(n-2)=n-1$之前的所有$|p(i)-i|=1$的数交换
+			\item $dp[n-1][k][B]*(n-k-2)\rightarrow dp[n][k][D]$：与在$p(n-2)=n-1$之前的所有$|p(i)-i|\neq 1$的数交换
+		\end{enumerate}
+		\item \begin{enumerate}
+			\item $dp[n-1][k][C]\rightarrow dp[n][k][A]$：不交换
+			\item $dp[n-1][k][C]\rightarrow dp[n][k][E]$：与$n-1$交换
+			\item $dp[n-1][k][C]\rightarrow dp[n][k][B]$：与$p(n-1)=n-2$交换
+			\item $dp[n-1][k+1][C]*(k-1)\rightarrow dp[n][k][D]$：与在$p(n-2)=n-1$之前的所有$|p(i)-i|=1$的数交换
+			\item $dp[n-1][k][C]*(n-k-1)\rightarrow dp[n][k][D]$：与在$p(n-2)=n-1$之前的所有$|p(i)-i|\neq 1$的数交换
+		\end{enumerate}
+		\item \begin{enumerate}
+			\item $dp[n-1][k][D]\rightarrow dp[n][k][A]$：不交换
+			\item $dp[n-1][k-1][D]\rightarrow dp[n][k][E]$：与$n-1$交换
+			\item $dp[n-1][k-1][D]\rightarrow dp[n][k][B]$：与$p(n-1)<n-2$交换
+			\item $dp[n-1][k+1][D]*(k+1)\rightarrow dp[n][k][D]$：与在$p(n-1)<n-2$之前的除了$n-1$外所有$|p(i)-i|=1$的数交换
+			\item $dp[n-1][k][D]*(n-k-3)\rightarrow dp[n][k][D]$：与在$p(n-1)<n-2$之前的除了$n-1$外所有$|p(i)-i|\neq 1$的数交换
+		\end{enumerate}
+		\item \begin{enumerate}
+			\item $dp[n-1][k][E]\rightarrow dp[n][k][A]$：不交换
+			\item $dp[n-1][k-1][E]\rightarrow dp[n][k][E]$：与$n-1$交换
+			\item $dp[n-1][k][E]\rightarrow dp[n][k][B]$：与$p(n-1)=n-2$交换
+			\item $dp[n-1][k+1][E]*k\rightarrow dp[n][k][D]$：与在$p(n-1)=n-2$之前的除了$n-1$外所有$|p(i)-i|=1$的数交换
+			\item $dp[n-1][k][E]*(n-k-2)\rightarrow dp[n][k][D]$：与在$p(n-1)=n-2$之前的除了$n-1$外所有$|p(i)-i|\neq 1$的数交换
+		\end{enumerate}
+	\end{enumerate}
+
+	解出所有$dp[n][k][X]$得
+
+	$\begin{aligned}
+		dp[n][k][A]=&dp[n-1][k][A]+dp[n-1][k][B]+dp[n-1][k][C]+\\
+		&dp[n-1][k][D]+dp[n-1][k][E]\\
+		dp[n][k][B]=&dp[n-1][k-1][B]+dp[n-1][k][C]+\\
+		&dp[n-1][k-1][D]+dp[n-1][k][E]\\
+		dp[n][k][C]=&dp[n-1][k-2][A]\\
+		dp[n][k][D]=&dp[n-1][k+1][A]*(k+1)+dp[n-1][k][A]*(n-k-2)+\\
+		&dp[n-1][k+1][B]*k+dp[n-1][k][B]*(n-k-2)+\\
+		&dp[n-1][k+1][C]*(k-1)+dp[n-1][k][C]*(n-k-1)+\\
+		&dp[n-1][k+1][D]*(k+1)+dp[n-1][k][D]*(n-k-3)+\\
+		&dp[n-1][k+1][E]*k+dp[n-1][k][E]*(n-k-2)\\
+		dp[n][k][E]=&dp[n-1][k][B]+dp[n-1][k][C]+\\
+		&dp[n-1][k-1][D]+dp[n-1][k-1][E]
+	\end{aligned}$
+
+	边界条件为：当$n<0$或$k<0$或$n<k$时，dp[n][k][X]=0；dp[1][0][A]=1。
+
+	问题给出n和k，相当于求$dp[n][k][A]+dp[n][k][B]+dp[n][k][C]+dp[n][k][D]+dp[n][k][E]$，也相当于求$dp[n+1][k][A]$，用记忆化搜索求出即可。
+\end{document}

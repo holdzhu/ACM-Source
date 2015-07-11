@@ -1,0 +1,36 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=2.44cm,right=2.44cm,top=2.44cm,bottom=2.44cm}
+	\title{D - 凤神与狗}
+	\author{何柱}
+	\allowdisplaybreaks
+\begin{document}
+	\maketitle
+	先计算出第n天带狗出去玩的概率。由题意可知，在第n天猫和狗的个数分别为$c+(n-x)w$，$d+xw$，其中$0\leq x \leq n$，记为$(c+(n-x)w,d+xw)$。由杨辉三角可知，从$(c,d)$到$(c+(n-x)w,d+xw)$有$\binom{n}{x}$种可能的转移方式，并通过计算可知每种情况的概率均是
+	$$\frac{(\prod_{i=0}^{n-x-1}(c+iw))(\prod_{i=0}^{x-1}(d+iw))}{\prod_{i=0}^{n-1}(c+d+iw)}$$
+	令$P(n,x)$表示从$(c,d)$转移到$(c+(n-x)w,d+xw)$并且带狗出去玩的概率，则
+	$$P(n,x)=\binom{n}{x}\frac{(\prod_{i=0}^{n-x-1}(c+iw))(\prod_{i=0}^{x}(d+iw))}{\prod_{i=0}^{n}(c+d+iw)}$$
+	令$P(n)$表示第n天带狗出去玩的概率，则
+	$$P(n)=\sum_{x=0}^{n}\binom{n}{x}\frac{(\prod_{i=0}^{n-x-1}(c+iw))(\prod_{i=0}^{x}(d+iw))}{\prod_{i=0}^{n}(c+d+iw)}$$
+	结合帕斯卡法则
+	$$\binom{n}{x}=\binom{n-1}{x}+\binom{n-1}{x-1}$$
+	得
+	$$P(n)=\sum_{x=0}^{n}\binom{n-1}{x}\frac{(\prod_{i=0}^{n-x-1}(c+iw))(\prod_{i=0}^{x}(d+iw))}{\prod_{i=0}^{n}(c+d+iw)}+\binom{n-1}{x-1}\frac{(\prod_{i=0}^{n-x-1}(c+iw))(\prod_{i=0}^{x}(d+iw))}{\prod_{i=0}^{n}(c+d+iw)}$$
+	合并相同组合数项，得
+	$$P(n)=\sum_{x=0}^{n-1}\binom{n-1}{x}\frac{(\prod_{i=0}^{n-x-2}(c+iw))(\prod_{i=0}^{x}(d+iw))}{\prod_{i=0}^{n-1}(c+d+iw)}=P(n-1)$$
+	$$\Rightarrow P(n)=P(0)=\frac{d}{c+d}$$
+	因此，第n天带狗出去玩的概率是$\frac{d}{c+d}$。下面计算第a天和第b天都带狗出去玩的概率。和上面的证明同理可以得到从$(c,d)$转移到$(c+(a-x)w,d+xw)$并且带狗出去玩的概率
+	$$P(a,x)=\binom{a}{x}\frac{(\prod_{i=0}^{a-x-1}(c+iw))(\prod_{i=0}^{x}(d+iw))}{\prod_{i=0}^{a}(c+d+iw)}$$
+	结合上面的结论，可以得到在上式的前提下第b天带狗出去玩的概率为
+	$$P_2(a,x)=\binom{a}{x}\frac{(\prod_{i=0}^{a-x-1}(c+iw))(\prod_{i=0}^{x+1}(d+iw))}{\prod_{i=0}^{a+1}(c+d+iw)}$$
+	然后就可以得到第a天和第b天都带狗出去玩的概率为
+	$$P_2(a)=\sum_{x=0}^{a}\binom{a}{x}\frac{(\prod_{i=0}^{a-x-1}(c+iw))(\prod_{i=0}^{x+1}(d+iw))}{\prod_{i=0}^{a+1}(c+d+iw)}$$
+	和上面的证明方法类似，可以得到
+	$$P_2(a)=P_2(0)=\frac{d(d+w)}{(c+d)(c+d+w)}$$
+
+	于是程序就变得十分的简单，只需求$g=gcd(d(d+w),(c+d)(c+d+w))$，再输出$\frac{d(d+w)}{g}$/$\frac{(c+d)(c+d+w)}{g}$就可以了。
+\end{document}

@@ -1,0 +1,47 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage{slashbox}
+	\usepackage{tabularx}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=3.18cm,right=3.18cm,top=2.44cm,bottom=2.44cm}
+	\title{F - 两句话题意}
+	\author{何柱}
+	\allowdisplaybreaks
+\begin{document}
+	\maketitle
+	先说一个比较重要的定理，设$f(n)$和$g(n)$为任意函数，下面两个命题等价：
+	\begin{enumerate}
+		\item[(i)] $$g(n)=\sum_{m=1}^{\infty}f(mn),n=1,2,3,\ldots$$
+		且
+		$$\exists\varepsilon>0,\sum_{n=1}^{\infty}n^\varepsilon|f(n)|\text{收敛}$$
+		\item[(ii)] $$f(n)=\sum_{m=1}^{\infty}\mu(m)g(mn),n=1,2,3,\ldots$$
+		且
+		$$\exists\varepsilon>0,\sum_{n=1}^{\infty}n^\varepsilon|g(n)|\text{收敛}$$
+	\end{enumerate}
+	其中$\mu$为默比乌斯函数
+	$$\mu(n)=\begin{cases}
+	1 & \text{若}n=1 \\
+	(-1)^k & \text{若}n\text{无平方数因数且}n=p_1p_2\ldots p_k \\
+	0 & \text{若}n\text{有大于}1\text{的平方数因数}
+	\end{cases}$$
+	令$f(n)$表示最大公约数为$n$的组数，$g(n)$表示有公约数$n$的组数，显然有
+	$$g(n)=\sum_{m=1}^{\infty}f(mn),n=1,2,3,\ldots,a_{max}$$
+	根据定理有
+	$$f(n)=\sum_{m=1}^{\infty}\mu(m)g(mn),n=1,2,3,\ldots,a_{max}$$
+	令$c(n)$表示集合中含有因子$n$的数字个数，则
+	$$g(n)=2^{c(n)}-1,n=1,2,3,\ldots,a_{max}$$
+	当$mn$超过集合元素的最大值$a_{max}$时，对$f(n)$的贡献永远为$0$，不必计算，即
+	$$f(n)=\sum_{m=1}^{\lfloor\frac{a_{max}}{n}\rfloor}\mu(m)g(mn),n=1,2,3,\ldots,a_{max}$$
+	根据题意，期望为
+	$$E=\frac{\sum_{x=1}^{a_{max}}x^kf(x)}{2^n-1}$$
+	要求的答案为
+	$$ans=(2^n-1)E \bmod 10000007$$
+	整理得
+	$$ans=(\sum_{x=1}^{a_{max}}x^k\sum_{m=1}^{\lfloor\frac{a_{max}}{x}\rfloor}\mu(m)g(mx)) \bmod 10000007$$
+	其中
+	$$g(n)=2^{c(n)}-1,n=1,2,3,\ldots,a_{max}$$
+	预处理函数$g(n)$的值，计算$x^k$时使用快速幂算法，时间复杂度为$O(n+a_{max}loga_{max}+a_{max}logk)$。
+\end{document}

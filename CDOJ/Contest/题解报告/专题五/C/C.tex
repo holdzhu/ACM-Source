@@ -1,0 +1,21 @@
+\documentclass[a4paper]{ctexart}
+	\usepackage{geometry}
+	\usepackage{enumerate}
+	\usepackage{ntheorem}
+	\usepackage{tikz}
+	\usepackage[fleqn]{amsmath}
+	\geometry{left=3.18cm,right=3.18cm,top=2.44cm,bottom=2.44cm}
+	\title{C - 一句话题意}
+	\author{何柱}
+	\allowdisplaybreaks
+\begin{document}
+	\maketitle
+	题目明显是要求Catalan number，公式是
+	$$C_n=\binom{2n}{n}-\binom{2n}{n+1}$$
+	由于$m$是质数，除法可以用模逆元素变为乘法，模逆元素的递推公式是
+	$$I_1=1$$
+	$$I_i=I_{m\bmod i}*(m-\lfloor\frac{m}{i}\rfloor)\bmod m$$
+	考虑到$n$可能会很大，可以用Lucas定理减少计算量，公式为
+	$$\binom{m}{n}\equiv\prod_{i=1}^{k}\binom{m_i}{n_i}\pmod{p}$$
+	其中$m_i$和$n_i$分别是$m$和$n$的$p$进制表示法中的各个数字。问题到此就解决了。此外还可以有小优化，如果分母的质因子中的$m$的次数比分子小，则可以直接输出0。
+\end{document}
