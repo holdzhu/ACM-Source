@@ -1,0 +1,2 @@
+#include <cstdio>
+int G[12][12],d[1<<12][12],n,u,i,j,k;int main(){scanf("%d%d",&n,&k);while(k--){scanf("%d%d",&u,&j);G[u-1][j-1]=1;}*d[1]=1;for(;i<1<<n;++i)for(u=0;u<n;++u)for(k=1;k<n&&d[i][u];++k)d[i|1<<k][k]+=~i&1<<k&&G[u][k]?d[i][u]:0;for(j=0;--u;)j+=*G[u]*d[i-1][u];return!printf("%d\n",j);}

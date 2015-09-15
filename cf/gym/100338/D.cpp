@@ -1,0 +1,2 @@
+#include<cstdio>
+int main(){freopen("nim.in","r",stdin);freopen("nim.out","w",stdout);int a,b,c;while(~scanf("%d%d%d",&a,&b,&c)&&a++|b++|c++)printf("%s wins the game.\n",a^b^c?"Alice":"Bob");return 0;}

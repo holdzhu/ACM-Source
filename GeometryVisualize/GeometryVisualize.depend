@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1435506592 source:f:\c\geometryvisualize\main.cpp
+	<SFML/Graphics.hpp>
+	<cstdio>
+	<cstdlib>
+	<vector>
+	<cmath>
+	<fstream>
+	<algorithm>
+

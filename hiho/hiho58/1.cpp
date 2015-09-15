@@ -1,0 +1,2 @@
+#include <cstdio>
+int c[999999],a[999999],p,t;int main(){scanf("%d",c);while(c[0]--){scanf("%*d ");c[1]=0;p=2;while((t=getchar())!='\n'){if(t==a[p])c[p]++;else a[++p]=t,c[p]=1;if(a[p-2]+2==a[p]&&a[p-1]+1==a[p]&&c[p-2]>=c[p-1]&&c[p-1]<=c[p])c[1]=1;}puts(c[1]?"YES":"NO");}return 0;}
