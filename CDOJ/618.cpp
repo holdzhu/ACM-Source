@@ -1,29 +1,40 @@
 #include <cstdio>
-#include <set>
+#include <algorithm>
+
 using namespace std;
+
+const int maxn = 1e6;
+bool isnotprime[maxn + 1];
+long long primes[maxn + 1];
+int cnt;
+
+long long solve(long long i, int j)
+{
+	return i == 0 || j < 0 ? i : solve(i, j - 1) - solve(i / primes[j], upper_bound(primes, primes + j, i / primes[j]) - primes - 1);
+}
 
 int main()
 {
-	int T;
-	set<long long> s;
-	for (long long i = 2; i < 1e3; ++i)
+	for (int i = 2; i <= maxn; ++i)
 	{
-		long long sq = i * i;
-		printf("%lld\n", sq);
-		if (!s.count(sq))
+		if (!isnotprime[i])
+			primes[cnt++] = i;
+		for (int j = 0; j < cnt && i * primes[j] <= maxn; ++j)
 		{
-			for (long long j = sq * sq; j < 1e12; j += sq)
-			{
-				s.insert(j);
-			}
+			isnotprime[i * primes[j]] = true;
+			if (i % primes[j] == 0)
+				break;
 		}
 	}
+	for (int i = 0; i < cnt; ++i)
+		primes[i] *= primes[i];
+	int T;
 	scanf("%d", &T);
 	while (T--)
 	{
 		long long n;
 		scanf("%lld", &n);
-		printf("%lld\n", n - distance(s.begin(), s.lower_bound(n)));
+		printf("%lld\n", solve(n, upper_bound(primes, primes + cnt, n) - primes - 1));
 	}
 	return 0;
 }

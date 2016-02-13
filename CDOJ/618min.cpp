@@ -1,0 +1,2 @@
+#include <algorithm>
+const int m=1e6;long long p[m],n,c,i,j,s[m];long long solve(long long i,int j){return !i||j<0?i:solve(i,j-1)-solve(i/p[j],std::upper_bound(p,p+j,i/p[j])-p-1);}int main(){for(i=2;i<m;++i){if(!s[i])p[c++]=i;for(j=0;j<c&&i*p[j]<m;++j){s[i*p[j]]=1;if(i%p[j]==0)break;}}for(i=0;i<c;++i)p[i]*=p[i];scanf("%lld",&i);while(i--){scanf("%lld",&n);printf("%lld\n",solve(n,std::upper_bound(p,p+c,n)-p-1));}}

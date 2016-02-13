@@ -1,0 +1,1 @@
+main(w,x,y,z){scanf("%*d%*d%d%d%d%d",&w,&x,&y,&z);puts((y=fabs(y-w))<5&&(z=fabs(z-x))<5&&y+z<7?"First":"Second");}

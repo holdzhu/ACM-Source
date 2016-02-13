@@ -1,0 +1,78 @@
+// BEGIN CUT HERE
+/*
+
+*/
+// END CUT HERE
+#line 7 "SwapPairs.cpp"
+#include <cstdlib>
+#include <cctype>
+#include <cstring>
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <set>
+#include <queue>
+#include <stack>
+#include <fstream>
+#include <numeric>
+#include <iomanip>
+#include <bitset>
+#include <list>
+#include <stdexcept>
+#include <functional>
+#include <utility>
+#include <ctime>
+using namespace std;
+
+#define PB push_back
+#define MP make_pair
+
+#define REP(i,n) for(i=0;i<(n);++i)
+#define FOR(i,l,h) for(i=(l);i<=(h);++i)
+#define FORD(i,h,l) for(i=(h);i>=(l);--i)
+
+typedef vector<int> VI;
+typedef vector<string> VS;
+typedef vector<double> VD;
+typedef long long LL;
+typedef pair<int,int> PII;
+
+
+class SwapPairs
+{
+	public:
+	int minCost(string s, vector <int> cost, int k)
+	{
+		return int();
+	}
+	
+// BEGIN CUT HERE
+	public:
+	void run_test(int Case) { if ((Case == -1) || (Case == 0)) test_case_0(); if ((Case == -1) || (Case == 1)) test_case_1(); if ((Case == -1) || (Case == 2)) test_case_2(); if ((Case == -1) || (Case == 3)) test_case_3(); if ((Case == -1) || (Case == 4)) test_case_4(); if ((Case == -1) || (Case == 5)) test_case_5(); }
+	private:
+	template <typename T> string print_array(const vector<T> &V) { ostringstream os; os << "{ "; for (typename vector<T>::const_iterator iter = V.begin(); iter != V.end(); ++iter) os << '\"' << *iter << "\","; os << " }"; return os.str(); }
+	void verify_case(int Case, const int &Expected, const int &Received) { cerr << "Test Case #" << Case << "..."; if (Expected == Received) cerr << "PASSED" << endl; else { cerr << "FAILED" << endl; cerr << "\tExpected: \"" << Expected << '\"' << endl; cerr << "\tReceived: \"" << Received << '\"' << endl; } }
+	void test_case_0() { string Arg0 = "aabcde"; int Arr1[] = {1, 1, 100000, 100000, 100000, 100000}; vector <int> Arg1(Arr1, Arr1 + (sizeof(Arr1) / sizeof(Arr1[0]))); int Arg2 = 2; int Arg3 = 200402; verify_case(0, Arg3, minCost(Arg0, Arg1, Arg2)); }
+	void test_case_1() { string Arg0 = "cdbcadc"; int Arr1[] = {261,208,150,250,92,226,176}; vector <int> Arg1(Arr1, Arr1 + (sizeof(Arr1) / sizeof(Arr1[0]))); int Arg2 = 1; int Arg3 = 1402; verify_case(1, Arg3, minCost(Arg0, Arg1, Arg2)); }
+	void test_case_2() { string Arg0 = "deebaffafdaaceaa"; int Arr1[] = {160,268,253,210,34,28,180,70,5,42,177,234,108,117,215,1}; vector <int> Arg1(Arr1, Arr1 + (sizeof(Arr1) / sizeof(Arr1[0]))); int Arg2 = 2; int Arg3 = 2507; verify_case(2, Arg3, minCost(Arg0, Arg1, Arg2)); }
+	void test_case_3() { string Arg0 = "babbbabbbbababababbb"; int Arr1[] = {184,189,202,170,296,71,136,48,51,161,221,24,221,186,223,228,73,274,279,22}; vector <int> Arg1(Arr1, Arr1 + (sizeof(Arr1) / sizeof(Arr1[0]))); int Arg2 = 4; int Arg3 = -1; verify_case(3, Arg3, minCost(Arg0, Arg1, Arg2)); }
+	void test_case_4() { string Arg0 = "aaaaaaaaaaaaaaaaaa"; int Arr1[] = {237,185,24,175,107,251,299,81,282,20,150,164,240,225,166,261,164,123}; vector <int> Arg1(Arr1, Arr1 + (sizeof(Arr1) / sizeof(Arr1[0]))); int Arg2 = 4; int Arg3 = -1; verify_case(4, Arg3, minCost(Arg0, Arg1, Arg2)); }
+	void test_case_5() { string Arg0 = "acadeffbffbfccbe"; int Arr1[] = {62,113,189,161,211,150,69,60,99,212,37,274,110,265,199,192}; vector <int> Arg1(Arr1, Arr1 + (sizeof(Arr1) / sizeof(Arr1[0]))); int Arg2 = 4; int Arg3 = 2235; verify_case(5, Arg3, minCost(Arg0, Arg1, Arg2)); }
+
+// END CUT HERE
+
+};
+
+// BEGIN CUT HERE
+int main()
+{
+	SwapPairs ___test;
+	___test.run_test(-1);
+	return 0;
+}
+// END CUT HERE

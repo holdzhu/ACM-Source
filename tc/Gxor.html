@@ -1,0 +1,61 @@
+<html><body bgcolor="#333333" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>There is a fixed integer n.
+All graphs in this problem are undirected unweighted graphs on n vertices.
+The vertices in each graph are numbered 0 through n-1.
+Additionally, all graphs are simple, i.e., they do not contain self-loops and multiple edges between the same two vertices.</p>
+
+<p>Given a sequence X of such graphs, the xor of that sequence is again a graph on our n vertices.
+We will denote this graph XOR(X).
+For each u and v, vertices u and v are connected by an edge in XOR(X) if and only if the number of graphs in X that contain the edge uv is odd.
+(In other words, the xor of two graphs is a graph that contains the edge uv if and only if exactly one of those two graphs contains the edge uv. We then extend this definition to a xor of arbitrarily many graphs in exactly the same way that is used to extend the bitwise xor to arbitrarily many integers.)</p>
+
+<p>Given a graph, we can convert it into a string using the following pseudocode:</p>
+<pre>
+string(G):
+    for u = 0 .. n-1:
+        for v = u+1 .. n-1:
+            if G contains the edge uv: print 1
+            else: print 0
+</pre>
+<p></p>
+<p>You are given a vector &lt;string&gt; <b>S</b> that describes a sequence S of n-vertex graphs.
+Each element of <b>S</b> is the string representation of one of those graphs.</p>
+
+<p>We want to erase some (possibly none, possibly all) graphs from <b>S</b>.
+Our goal is to produce a sequence T such that XOR(T) is a connected graph.
+Return the number of ways in which we can do that.
+(Two ways are considered distinct if the sets of indices of erased graphs differ.)</p>
+Note that all n vertices of the graph XOR(T) have to be in the same connected component - there must not be any isolated vertices.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>Gxor</td></tr><tr><td>Method:</td><td>countsubs</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>long long</td></tr><tr><td>Method signature:</td><td>long long countsubs(vector &lt;string&gt; S)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>S</b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>S</b> will contain exactly n * (n - 1) / 2 characters.</td></tr><tr><td align="center" valign="top">-</td><td>n will be between 2 and 9, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>S</b> will be either '0' or '1'.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;1&quot;,&quot;1&quot;,&quot;0&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4</pre></td></tr><tr><td><table><tr><td colspan="2">This S contains three 2-vertex graphs.
+Two of them contain the edge 0-1, one doesn't.
+In order to have a connected XOR(T) we have to erase exactly one of the first two graphs, and we may or may not erase the last graph.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;011001&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;111011&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;110&quot;,&quot;011&quot;,&quot;101&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 6</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;111110&quot;,&quot;100000&quot;,&quot;100101&quot;,&quot;010101&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 11</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;110010000000111110101001001001101010&quot;,
+&quot;101011011000101001111110010000000001&quot;,
+&quot;010001101100000010010110000001100010&quot;,
+&quot;101100011110001011101000100010001111&quot;,
+&quot;111010000010010101010111001000000100&quot;,
+&quot;101100001101011101101011011001000010&quot;,
+&quot;111111010000000000110000010101100100&quot;}
+</pre></td></tr></table></td></tr><tr><td><pre>Returns: 121</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">6)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;000000100000100110001000110001001000&quot;,&quot;010100001000000000000001001010000000&quot;,
+&quot;101000100010000100000000010000000010&quot;,&quot;110001101110110000010000000001000101&quot;,
+&quot;000001000000010000000110001010100101&quot;,&quot;100100010001010000000000000010000010&quot;,
+&quot;111001000000111111001001011001010000&quot;,&quot;100001100000110001011110000001010001&quot;,
+&quot;111000000001100100000000000011100000&quot;,&quot;111010110000011000100000000001101000&quot;,
+&quot;001000100000001010001001001000011001&quot;,&quot;110111001101000100000101000100100100&quot;,
+&quot;100111000010100110001100101101000001&quot;,&quot;000010100000110111000000000100100000&quot;,
+&quot;000100001010000000010010000000100100&quot;,&quot;001100000010010000000100100001100000&quot;,
+&quot;001000100100000100001000000100010001&quot;,&quot;011010000110001000000001010011001100&quot;,
+&quot;000100011111100000000010010010110000&quot;,&quot;000001010101001010011111100000000110&quot;,
+&quot;000010000010001010100100010001100000&quot;,&quot;010001011000000000000100000110000001&quot;,
+&quot;010000000100100000000000000000011000&quot;,&quot;100101001000001100000100001000000001&quot;,
+&quot;100010000000000000000001000000010000&quot;,&quot;101010000010001001011011000000000100&quot;,
+&quot;000010000000011010111000010111100100&quot;,&quot;010001101111000100100101110000100000&quot;,
+&quot;000110010000000100000000000010000010&quot;,&quot;111000001000000010010000011100000100&quot;,
+&quot;000010101100100100010100000000000000&quot;,&quot;110010001000100100010000000000000000&quot;,
+&quot;011000100000000100110101101100100001&quot;,&quot;000100000011001110100000001100111010&quot;,
+&quot;000110001101100010100000000000010000&quot;,&quot;000110010010011001010010100110001001&quot;,
+&quot;110001100000010000000000100100010110&quot;,&quot;001110011000110000100110000011001000&quot;,
+&quot;000001000100000110011100000100000101&quot;,&quot;100001000000010000100000101001101100&quot;,
+&quot;011010110000011000110011111101011110&quot;,&quot;010001100010101100000101000000010001&quot;,
+&quot;011011000101000001101110100011110110&quot;,&quot;101000001100010010001100011000000010&quot;,
+&quot;001111000011100001110000010010010001&quot;,&quot;010000001010010000010000101000110000&quot;,
+&quot;001101100001000101000100010011001110&quot;,&quot;001010110110101000010100101101010101&quot;,
+&quot;000100010111110010010100101000100101&quot;,&quot;100010000000010101111010010000110001&quot;}
+</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1086198432923648</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

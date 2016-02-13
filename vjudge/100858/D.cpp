@@ -1,0 +1,3 @@
+#include<cstdio>
+#include<cmath>
+double dp[1<<20],t[20];int x[20],y[20],a,n,l,r,i,j;int main(){scanf("%d%d%d",&n,&l,&r);for(i=0;i<n;++i)scanf("%d%d%d",x+i,y+i,&a),x[i]-=l,t[i]=tan((90-a)*acos(-1)/180);for(i=0;i<1<<n;++i)for(j=0;j<n;++j)if(~i>>j&1)dp[i|(1<<j)]=fmax(dp[i|(1<<j)],y[j]*t[j]+x[j]<=dp[i]?1e9:dp[i]+(y[j]*y[j]+(x[j]-dp[i])*(x[j]-dp[i]))/(y[j]*t[j]+x[j]-dp[i]));printf("%.9f\n",fmin(r-l,dp[i-1]));return 0;}

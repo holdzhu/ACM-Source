@@ -1,0 +1,1 @@
+int n,m,w,x,y,z;main(){scanf("%d%d%d%d%d%d",&n,&m,&w,&x,&y,&z);puts(fabs(y-=w)<5&&fabs(z-=x)<5&&fabs(y)+fabs(z)<7?"First":"Second");}

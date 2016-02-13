@@ -1,0 +1,96 @@
+<html><body bgcolor="#333333" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><p>
+<i>
+This problem has a non-standard time limit: 5 seconds.
+</i>
+</p>
+
+<p>
+Farmer John recently found out about a popular online farming game.
+</p>
+
+<p>
+There are n types of plants in the game.
+The types are numbered 0 through n-1.
+</p>
+
+<p>
+Growing a plant consists of four steps:
+<ul>
+<li>Farmer John must acquire a seed of the plant. This is described below in more detail.</li>
+<li>He must plant the seed. He can do this instantaneously. He can have arbitrarily many plants growing at the same time.</li>
+<li>The seed of plant i will grow for <b>time</b>[i] seconds until it becomes a fully developed plant.</li>
+<li>Farmer John will harvest the plant. He can do this instantaneously.</li>
+</ul>
+</p>
+
+<p>
+Some plants have prerequisites.
+These are described by the vector &lt;string&gt; <b>s</b>.
+For each i, <b>s</b>[i] is a string of n zeros and ones.
+If the character <b>s</b>[i][j] is '1', Farmer John must have a fully grown plant j before he can acquire a seed of plant i.
+As soon as all prerequisites for plant i are satisfied, Farmer John will immediately acquire its seed.
+It is guaranteed that the prerequisites are not cyclic: there will be a way for Farmer John to eventually grow a plant of each type.
+</p>
+
+<p>
+Note that a single grown plant can be used to satisfy multiple prerequisites.
+For example, if both plant 0 and plant 1 require John to grow plant 2 first, he only has to grow a single plant of type 2 in order to "unlock" both plant 0 and plant 1.
+</p>
+
+<p>
+There is one final complication:
+Farmer John has <b>budget</b> coins.
+He can spend these coins to make his plants grow faster.
+For each i, Farmer John may pay <b>cost</b>[i] coins to reduce <b>time</b>[i] by 1.
+Farmer John may pay for the same plant multiple times, each time decreasing its growing time by 1.
+Obviously, the growing time cannot be reduced below 0.
+</p>
+
+<p>
+You are given the vector &lt;string&gt; <b>s</b>, the vector &lt;int&gt;s <b>time</b> and <b>cost</b>, and the int <b>budget</b>.
+Determine and return the minimum amount of time in which Farmer John can fully grow one plant of each type.
+</p></td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>Farmville</td></tr><tr><td>Method:</td><td>minTime</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;, vector &lt;int&gt;, vector &lt;int&gt;, int</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int minTime(vector &lt;string&gt; s, vector &lt;int&gt; time, vector &lt;int&gt; cost, int budget)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>5.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td>n will be between 2 and 50, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>s</b> will have exactly n elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>s</b> will contain exactly n characters.</td></tr><tr><td align="center" valign="top">-</td><td>Each character of <b>s</b>[i] will either be '0' or '1'.</td></tr><tr><td align="center" valign="top">-</td><td>There will only be at most 50 '1' characters among all characters in all elements of <b>s</b>.</td></tr><tr><td align="center" valign="top">-</td><td>It is guaranteed that it is possible to grow at least one plant of each type given the constraints in <b>s</b>.</td></tr><tr><td align="center" valign="top">-</td><td><b>time</b> will have exactly n elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>time</b> will be between 1 and 25, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>cost</b> will have exactly n elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element of <b>cost</b> will be between 1 and 10^9, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>budget</b> will be between 0 and 10^9, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;000&quot;,
+ &quot;000&quot;,
+ &quot;000&quot;}</pre></td></tr><tr><td><pre>{25,15,10}</pre></td></tr><tr><td><pre>{1,2,3}</pre></td></tr><tr><td><pre>50</pre></td></tr></table></td></tr><tr><td><pre>Returns: 6</pre></td></tr><tr><td><table><tr><td colspan="2"><p>
+There are no prerequisites.
+Hence, Farmer John will acquire all three seeds at time 0 and he will plant them all simultaneously.
+If he didn't spend any coins, the process would be over at time 25 when the plant of type 0 finally becomes fully developed.
+He can improve that time by spending his 50 coins.
+</p>
+
+<p>
+One optimal solution looks as follows:
+<ul>
+<li>He will spend 19 coins on plant 0, decreasing its growing time from 25 to 25 - 19 = 6.</li>
+<li>He will spend 18 coins on plant 1. As <b>cost</b>[1]=2, every 2 coins decrease the time by 1. Hence, plant 1 will now grow in 15 - (18/2) = 15 - 9 = 6 units of time.</li>
+<li>He will spend 12 coins on plant 2. These will decrease its growing time by 12/3 = 4, which means it drops from 10 to 10 - 4 = 6.</li>
+<li>He will have 1 unused coin.</li>
+</ul>
+</p></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;0000&quot;,
+ &quot;1000&quot;,
+ &quot;0100&quot;,
+ &quot;0010&quot;}</pre></td></tr><tr><td><pre>{25,25,25,25}</pre></td></tr><tr><td><pre>{100,200,300,400}</pre></td></tr><tr><td><pre>2800</pre></td></tr></table></td></tr><tr><td><pre>Returns: 74</pre></td></tr><tr><td><table><tr><td colspan="2">In this test case Farmer John must grow his plants sequentially in the order 0,1,2,3.
+If he didn't pay anything, this would take 25 + 25 + 25 + 25 = 100 units of time.
+One optimal solution is to spend 2500 coins on the plant 0 (making it grow in zero time) and the remaining 300 coins on plant 2 (decreasing its growing time by 1).
+Thus, in this solution the total growing time is 0 + 25 + 24 + 25 = 74.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;01110&quot;,
+ &quot;00010&quot;,
+ &quot;00000&quot;,
+ &quot;00000&quot;,
+ &quot;10000&quot;}</pre></td></tr><tr><td><pre>{25,10,23,12,5}</pre></td></tr><tr><td><pre>{123,456,789,1011,1213}</pre></td></tr><tr><td><pre>1000000000</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;00&quot;,
+ &quot;00&quot;}</pre></td></tr><tr><td><pre>{25,25}</pre></td></tr><tr><td><pre>{1000000000,1000000000}	</pre></td></tr><tr><td><pre>1000000000</pre></td></tr></table></td></tr><tr><td><pre>Returns: 25</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;0000000000000000&quot;,
+ &quot;1000000000000000&quot;,
+ &quot;1000000000000000&quot;,
+ &quot;0100000000000000&quot;,
+ &quot;0110000000000000&quot;,
+ &quot;0010000000000000&quot;,
+ &quot;0001000000000000&quot;,
+ &quot;0001100000000000&quot;,
+ &quot;0000110000000000&quot;,
+ &quot;0000010000000000&quot;,
+ &quot;0000001100000000&quot;,
+ &quot;0000000110000000&quot;,
+ &quot;0000000011000000&quot;,
+ &quot;0000000000110000&quot;,
+ &quot;0000000000011000&quot;,
+ &quot;0000000000000110&quot;}</pre></td></tr><tr><td><pre>{24,25,23,25,23,24,25,24,23,22,25,24,23,25,23,25}</pre></td></tr><tr><td><pre>{82912,129482,235934,3294812,523942,460492,349281,592384,
+109248,2305923,340945,2304934,582396,548935,767872,423981}</pre></td></tr><tr><td><pre>87654321</pre></td></tr></table></td></tr><tr><td><pre>Returns: 49</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;000&quot;,&quot;100&quot;,&quot;110&quot;}</pre></td></tr><tr><td><pre>{3,18,1}</pre></td></tr><tr><td><pre>{242949,8471,54403957}</pre></td></tr><tr><td><pre>53867</pre></td></tr></table></td></tr><tr><td><pre>Returns: 16</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
