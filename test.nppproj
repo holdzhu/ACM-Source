@@ -1,6 +1,6 @@
 <project author="darkbull" blog="http://darkbull.net">
   <node name="test" isDir="True" isExpand="True">
-    <node name="test1.c" isDir="False" isExpand="False" />
     <node name="test.c" isDir="False" isExpand="False" />
+    <node name="test1.c" isDir="False" isExpand="False" />
   </node>
 </project>
