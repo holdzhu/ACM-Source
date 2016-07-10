@@ -1,0 +1,39 @@
+<html><body bgcolor="#333333" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Fox Ciel has a collection of bags.
+Each of those bags contains some gemstones.
+You are given the contents of the bags as a vector &lt;string&gt; <b>bags</b>.
+Each element of <b>bags</b> represents one of the bags.
+Different characters represent different gemstone types.
+For example, if <b>bags</b>[2]="ABAC", we know that bag 2 contains two gems of type A, one gem of type B, and one gem of type C.
+<br></br>
+<br></br>
+There are at most 16 different types of gems.
+Gems of the same type always have the same weight.
+Gems of different types always have different weights.
+Each weight is some positive real number.
+<br></br>
+<br></br>
+Fox Ciel wants to identify the heaviest of all her bags.
+(It is possible that multiple bags are tied for being the heaviest.
+In that case, Ciel wants to identify any one of those bags.)
+<br></br>
+<br></br>
+Ciel has only one tool she can use while solving this task: a tiny balance scale.
+The scale is so small that the only thing she can do is to compare the weights of two gems.
+I.e., in each weighing she will take two gems of different types, place each of them onto one of the pans of the scale, determine which type of gems weighs more, and then she'll return both gems to their original places.
+Ciel can use the scale arbitrarily many times.
+<br></br>
+<br></br>
+You are given the vector &lt;string&gt; <b>bags</b>, but you don't know anything about the weights of the gems.
+Return "Possible" if you can be sure that Ciel will be able to identify the heaviest bag.
+Otherwise, return "Impossible".
+In other words, return "Impossible" if there is some combination of weights of gemstone types such that Ciel won't be able to determine with certainty which bag is the heaviest one.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>FoxAndGemstone</td></tr><tr><td>Method:</td><td>isPossible</td></tr><tr><td>Parameters:</td><td>vector &lt;string&gt;</td></tr><tr><td>Returns:</td><td>string</td></tr><tr><td>Method signature:</td><td>string isPossible(vector &lt;string&gt; bags)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>bags</b> will contain between 2 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>bags</b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>bags</b> will be one of the first 16 uppercase English letters ('A'-'P').</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;AB&quot;, &quot;AC&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">Ciel just needs to compare a gem of type B and a gem of type C.
+If B is heavier, bag 0 is the heaviest bag.
+Otherwise, bag 1 is the heaviest bag.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;A&quot;, &quot;BC&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Impossible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">This is an interesting situation.
+For some combinations of weights Fox Ciel will find the heaviest bag.
+For example, if she discovers that A &lt; B, she can be certain that the bag "BC" is heavier than the bag "A".
+<br></br>
+<br></br>
+However, there are some combinations of weights for which Ciel won't be successful.
+For example, suppose she weighs the gems and she finds out that A &gt; B &gt; C.
+Given the above information, it is possible that A &gt; B+C, but it is also possible that A &lt; B+C.
+In this situation, Ciel has no way of telling which bag is the heavier one.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;AB&quot;, &quot;AC&quot;, &quot;BC&quot;, &quot;ABC&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2">Here Ciel doesn't need the scale at all, she can simply choose the last bag.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;AB&quot;,&quot;AC&quot;,&quot;AD&quot;,&quot;BC&quot;,&quot;BD&quot;,&quot;CD&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;AB&quot;, &quot;CD&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Impossible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{&quot;A&quot;, &quot;A&quot;, &quot;A&quot;}</pre></td></tr></table></td></tr><tr><td><pre>Returns: &quot;Possible&quot;</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

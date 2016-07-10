@@ -1,0 +1,1 @@
+d=10007;C[11];s;p(a,k){s=1;while(k){if(k&1)s=s*a%d;a=a*a%d;k/=2;}return s;}main(m,n,t,i,j,a){scanf("%d%d%d",&m,&n,&t);for(i=C[0]=1;i<=t;++i)for(j=i;j;--j)C[j]+=C[j-1];for(i=0;i<=t;++i)a+=p(m-2*i+d,n)*C[i];printf("%d\n",a%d*p((d+1)/2,t)%d);}
